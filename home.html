@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore breathtaking destinations with Wanderlust Adventure. Travel, explore, and create memories.">
+  <meta property="og:title" content="Wanderlust Adventure">
+  <meta property="og:description" content="Your journey begins here. Explore the world with us.">
+  <meta property="og:image" content="https://images.pexels.com/photos/38238/maldives-ile-beach-sun-38238.jpeg">
+  <title>Wanderlust Adventure</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --nav-bg: rgba(0, 0, 0, 0.4);
+      --button-bg: #007bff;
+      --button-text: #ffffff;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: url("https://images.pexels.com/photos/38238/maldives-ile-beach-sun-38238.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1080") no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* NAVBAR */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: var(--nav-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: box-shadow 0.3s ease;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav .logo img {
+      height: 40px;
+      width: 40px;
+    }
+
+    nav .logo h1 {
+      font-size: 1.5rem; 
+      font-weight: bold;
+      color: white;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s, border-bottom 0.3s;
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc00;
+      border-bottom: 2px solid #ffcc00;
+    }
+
+    nav ul li a.active {
+      color: #ffcc00;
+      border-bottom: 2px solid #ffcc00;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .nav-btn {
+      background-color: #ffcc00;
+      color: #000;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+    }
+
+    .nav-btn:hover {
+      background-color: #f5b800;
+      transform: scale(1.05);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.9);
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 240px;
+        padding: 20px;
+        border-radius: 10px 0 0 10px;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+      }
+      nav ul.show { transform: translateX(0); }
+      .hamburger { display: flex; }
+      .nav-buttons { flex-direction: column; margin-top: 10px; }
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      position: relative;
+      color: white;
+    }
+
+    .content {
+      margin-top: auto;
+      padding-bottom: 80px;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .content h2 { 
+      font-size: 18px; 
+      color: #ddd; 
+    }
+    .content h1 { 
+      font-size: 48px; 
+      font-weight: bold; 
+      margin: 20px 0; 
+    }
+    .content p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+
+    .cta-button {
+      background-color: var(--button-bg);
+      border: none;
+      padding: 14px 30px;
+      color: var(--button-text);
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: #0056b3;
+    }
+
+    .image-float {
+      position: absolute;
+      bottom: 80px;
+      width: 150px;
+      border-radius: 15px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .image-left { left: 80px; }
+    .image-right { right: 80px; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* DESTINATION CARDS */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: none;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      text-align: center;
+      padding: 20px;
+      color: white;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .card img {
+      width: auto;
+      height: 200px; 
+      max-width: 100%; 
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    footer {
+      background: rgba(96, 130, 182, 0.7);
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .content h1 { font-size: 32px; }
+      .content p { font-size: 16px; }
+    }
+
+    /* ===== POPUP OVERLAY ===== */
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 9999;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.3s;
+    }
+
+    .popup-overlay.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* POPUP BOX */
+    .popup-box {
+      background: rgba(0, 0, 0, 0.7); 
+      color: #fff;
+      padding: 40px 50px;
+      text-align: center;
+      border-radius: 12px;
+      max-width: 400px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: scale(0.9);
+      animation: fadeInPopup 1s ease forwards;
+    }
+
+    @keyframes fadeInPopup {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .popup-box h2 {
+      margin-bottom: 10px;
+    }
+
+    .popup-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .popup-btn {
+      background-color: #ffcc00;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .popup-btn:hover {
+      background-color: #f5b800;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero">
+    <nav>
+      <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/201/201623.png" alt="Logo">
+        <h1>Wanderlust Adventure</h1>
+      </div>
+
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+
+      <ul id="nav-links">
+        <li><a href="home.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <div class="nav-buttons" id="authButtons">
+          <a href="login.html" class="nav-btn" id="loginBtn">Login</a>
+          <a href="register.html" class="nav-btn" id="registerBtn">Register</a>
+          <button class="nav-btn" id="logoutBtn" style="display:none;">Logout</button>
+        </div>
+      </ul>
+    </nav>
+
+    <div class="content">
+      <h2>YOUR JOURNEY BEGINS HERE</h2>
+      <h1>Explore the World with<br/>Wanderlust Adventure</h1>
+      <p>Unleash your inner traveler. Discover breathtaking destinations, unforgettable experiences, and the freedom of the open road.</p>
+      <button class="cta-button" onclick="goToServices()">Start Your Adventure</button>
+    </div>
+
+    <img src="https://images.pexels.com/photos/2253821/pexels-photo-2253821.jpeg?auto=compress&cs=tinysrgb&h=350" alt="Canyon View" class="image-float image-left" />
+    <img src="https://images.pexels.com/photos/931007/pexels-photo-931007.jpeg?auto=compress&cs=tinysrgb&h=350" alt="Aurora Night" class="image-float image-right" />
+  </div>
+
+  <section style="padding: 60px 40px;">
+    <h2 style="text-align:center; margin-bottom:30px; color:white;">Popular Destinations</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://www.pelago.com/img/destinations/paris/0619-0939_paris.jpg" alt="Paris">
+        <h3>Paris</h3>
+        <p>The city of lights and love.</p>
+      </div>
+      <div class="card">
+        <img src="https://lilybeachmaldives.com/wp-content/uploads/2017/09/aerial-2.jpg" alt="Maldives">
+        <h3>Maldives</h3>
+        <p>Turquoise waters & white sands.</p>
+      </div>
+      <div class="card">
+        <img src="https://danso.info/wp-content/uploads/2025/03/Tokyo-scaled.jpg" alt="Tokyo">
+        <h3>Tokyo</h3>
+        <p>Where tradition meets modernity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== POPUP FOR NEW USERS ===== -->
+  <div id="welcomePopup" class="popup-overlay">
+    <div class="popup-box">
+      <h2>Welcome to Wanderlust Adventure!</h2>
+      <p>Please Sign up or Sign in to explore our destinations.</p>
+      <div class="popup-buttons">
+        <a href="register.html" class="popup-btn">Register</a>
+        <a href="login.html" class="popup-btn">Login</a>
+      </div>
+    </div>
+  </div>
+
+<footer>
+  <p>&copy; 2025 Wanderlust Adventure | All Rights Reserved</p>
+</footer>
+<script>
+  function toggleMenu() {
+    document.getElementById("nav-links").classList.toggle("show");
+  }
+
+  document.querySelectorAll("#nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      document.getElementById("nav-links").classList.remove("show");
+    });
+  });
+
+  window.addEventListener("scroll", () => {
+    const nav = document.querySelector("nav");
+    nav.classList.toggle("scrolled", window.scrollY > 50);
+  });
+
+  function goToServices() {
+    window.location.href = "destinations.html";
+  }
+
+  // ===== USER SESSION CONTROL =====
+  window.addEventListener("load", () => {
+    const popup = document.getElementById("welcomePopup");
+    const userLoggedIn = localStorage.getItem("wanderlustUser");
+    const loginBtn = document.getElementById("loginBtn");
+    const registerBtn = document.getElementById("registerBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    // If user is logged in
+    if (userLoggedIn) {
+      popup.style.display = "none";
+      loginBtn.style.display = "none";
+      registerBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+    } else {
+      popup.classList.add("show");
+      loginBtn.style.display = "inline-block";
+      registerBtn.style.display = "inline-block";
+      logoutBtn.style.display = "none";
+    }
+
+    // Logout function
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("wanderlustUser");
+      alert("You have been logged out successfully!");
+      window.location.reload();
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wanderlust Adventure</title>
+  <style>
+    /* Base reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      color: #ffa500;
+      background: url('https://images.pexels.com/photos/210012/pexels-photo-210012.jpeg?auto=compress&cs=tinysrgb&h=700') no-repeat center center/cover;
+      background-attachment: fixed;
+      scroll-behavior: smooth;
+    }
+
+    /* NAV */
+    nav {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px 40px; 
+      z-index: 100;
+      transition: background 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Logo */
+    nav .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    nav .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    nav .logo h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    /* Nav links */
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #ffcc00;
+      border-bottom: 2px solid #ffcc00;
+    }
+
+    /* HERO */
+    .about-hero {
+      height: 60vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .about-hero h1 {
+      font-size: 50px;
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1.6s ease;
+    }
+
+    .about-hero h1.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Content */
+    .about-content {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: 40px auto;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+
+    .about-content.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-content h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #ffa500;
+      text-align: center;
+    }
+
+    .about-content p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ddd;
+    }
+
+    footer {
+      background: rgba(96, 130, 182, 0.7);
+      padding: 20px;
+      text-align: center;
+      color: white;
+      margin-top: 40px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      nav .logo h1 { font-size: 1.3rem; }
+      .about-hero h1 { font-size: 34px; }
+      .about-content p { font-size: 16px; }
+      nav ul { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/201/201623.png" alt="Logo">
+      <h1>Wanderlust Adventure</h1>
+    </div>
+
+    <ul id="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="about-hero">
+    <h1 id="about-title">About Us</h1>
+  </div>
+
+  <div class="about-content" id="about-content">
+    <h2>Who We Are</h2>
+    <p>At Wanderlust Escapes, we believe travel is more than a destination—it’s a journey that enriches the soul. Founded by passionate explorers, we curate exceptional travel experiences around the world. Whether you’re chasing the Northern Lights, wandering through ancient ruins, or basking on remote beaches, we make every moment unforgettable.</p>
+
+    <h2>Our Mission</h2>
+    <p>We believe travel is more than visiting places—it’s about creating memories, meeting new cultures, and discovering yourself. Our mission is to design unforgettable trips that connect you to the heart of every destination.</p>
+
+    <h2>Why Choose Us?</h2>
+    <p>With years of expertise, trusted global partners, and a commitment to sustainable tourism, we craft experiences tailored to every traveler. Whether you dream of adventure, relaxation, or cultural discovery, we make it happen.</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Wanderlust Adventure | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Animate About title on load
+    window.addEventListener('load', () => {
+      const title = document.getElementById('about-title');
+      setTimeout(() => title.classList.add('show'), 300);
+    });
+
+    // Animate content on scroll
+    window.addEventListener('scroll', () => {
+      const about = document.getElementById('about-content');
+      if (!about.classList.contains('show') && about.getBoundingClientRect().top < window.innerHeight - 100) {
+        about.classList.add('show');
+      }
+
+      // Change nav background slightly on scroll
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 60) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
+  </script>
+</body>
+</html>

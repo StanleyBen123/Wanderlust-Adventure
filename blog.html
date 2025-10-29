@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wanderlust Adventure </title>
+  <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      font-family: Arial, sans-serif;
+      color: #333;
+      background-image: url('https://images.pexels.com/photos/1533483/pexels-photo-1533483.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1200');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* Header Section */
+    .blogs-header {
+      color: white;
+      padding: 80px 20px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; 
+      text-align: center;
+      position: relative;
+    }
+
+    .blogs-header h1 {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    .blogs-header p {
+      font-size: 30px;
+      color: #eee;
+    }
+
+    /* Navigation*/
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    nav .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+
+    nav .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #ffcc00;
+      border-bottom: 2px solid #ffcc00;
+    }
+
+    /* Blog Cards Section */
+    .blogs-section {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 80px 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .blog-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      max-width: 380px;
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+  .blog-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+  }
+
+    .blog-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+      color: white;
+      text-shadow: 0 0 5px rgba(0,0,0,0.4);
+    }
+
+    .blog-card h3 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #ffdd55;
+    }
+
+    .blog-card p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    /* Fade-in animation keyframes */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade-in for header content */
+.blogs-header h1,
+.blogs-header p {
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.blogs-header h1 {
+  animation-delay: 0.3s;
+}
+
+.blogs-header p {
+  animation-delay: 0.6s;
+}
+
+/* Fade-in for blog cards */
+.blog-card {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+/* staggered animation delays for each card */
+.blog-card:nth-child(1) { animation-delay: 0.3s; }
+.blog-card:nth-child(2) { animation-delay: 0.5s; }
+.blog-card:nth-child(3) { animation-delay: 0.7s; }
+.blog-card:nth-child(4) { animation-delay: 0.9s; }
+.blog-card:nth-child(5) { animation-delay: 1.1s; }
+.blog-card:nth-child(6) { animation-delay: 1.3s; }
+
+    /* Responsive layout */
+    @media (max-width: 900px) {
+    .blog-card {
+      width: 90%;
+    }
+  }
+
+    /* Footer */
+    footer {
+      background: rgba(96, 130, 182, 0.7);
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .blogs-header h1 {
+        font-size: 32px;
+      }
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="blogs-header">
+    <!-- Navigation identical to Destinations page -->
+    <nav>
+      <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/201/201623.png" alt="Logo">
+        Wanderlust Adventure
+      </div>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <h1>Our Travel Blogs</h1>
+    <p>Discover stories, tips, and experiences from around the globe</p>
+  </div>
+
+  <div class="blogs-section">
+    <div class="blog-card">
+      <img src="https://images.pexels.com/photos/2104742/pexels-photo-2104742.jpeg" alt="Golden Bridge" />
+      <div class="card-content">
+        <h3>Golden Bridge</h3>
+        <p>Relax and recharge on pristine bridges with our curated urban escapes.</p>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <img src="https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg" alt="Bali Gate" />
+      <div class="card-content">
+        <h3>Bali Gate</h3>
+        <p>Enter the huge gate and witness the power of nature and its scenery in Bali.</p>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <img src="https://cdn.britannica.com/94/125794-050-FB09B3F4/Hikers-Gore-Range-Mountains-Denver.jpg" alt="Hiking" />
+      <div class="card-content">
+        <h3>Hiking</h3>
+        <p>Conquer new heights with guided treks, hikes, and thrilling adventures.</p>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <img src="https://images.stockcake.com/public/7/9/8/798d4235-0517-4520-8dff-cca85ac9f168_large/misty-waterfall-view-stockcake.jpg" alt="Forest Waterfall" />
+      <div class="card-content">
+        <h3>Forest Waterfall</h3>
+        <p>Feel the serenity of hidden waterfalls deep within lush green forests.</p>
+      </div>
+    </div>
+    <div class="blog-card">
+    <img src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg" alt="Santorini Sunset" />
+    <div class="card-content">
+      <h3>Santorini Sunset</h3>
+      <p>Watch the sky turn gold and pink as the sun sets over the white cliffs of Santorini.</p>
+    </div>
+  </div>
+  <div class="blog-card">
+    <img src="https://images.pexels.com/photos/210243/pexels-photo-210243.jpeg" alt="Desert Safari" />
+    <div class="card-content">
+      <h3>Desert Safari</h3>
+      <p>Ride through golden dunes, experience Bedouin culture, and gaze at the starlit desert sky.</p>
+    </div>
+  </div>
+  </div>
+  <script>
+  // Function to reveal elements on scroll
+  const revealOnScroll = () => {
+    const elements = document.querySelectorAll('.blogs-header h1, .blogs-header p, .blog-card');
+    elements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.style.animationPlayState = 'running';
+      }
+    });
+  };
+
+  // Initially pause animations
+  document.querySelectorAll('.blogs-header h1, .blogs-header p, .blog-card')
+    .forEach(el => el.style.animationPlayState = 'paused');
+
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+  </script>
+
+  <footer>
+    <p>&copy; 2025 Wanderlust Adventure | All Rights Reserved</p>
+  </footer>
+</body>
+</html>

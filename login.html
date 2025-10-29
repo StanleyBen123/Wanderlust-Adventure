@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wanderlust Adventure</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('https://www.travelandleisure.com/thmb/rbPz5_6COrWFh94qFRHYLJrRM-g=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/iguazu-falls-argentina-brazil-MOSTBEAUTIFUL0921-e967cc4764ca4eb2b9941bd1b48d64b5.jpg?auto=compress&cs=tinysrgb&dpr=2&h=1000') center/cover no-repeat;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 15px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: scale(0.9);
+      animation: fadeInPopup 1s ease forwards;
+    }
+
+    h2 {
+      color: #ffcc00;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .input-group {
+      position: relative;
+      width: 100%;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 40px 12px 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      display: block;
+      background-color: #fff;
+      color: #000;
+    }
+
+    .eye-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: #555;
+      padding: 0;
+      user-select: none;
+    }
+    .eye-icon:hover {
+      color: #ffcc00;
+      transform: translateY(-50%) scale(1.2);
+      transition: 0.2s ease;
+    }
+
+    button {
+      width: 100%;
+      background-color: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin-top: 5px;
+      display: block;
+    }
+
+    button:hover {
+      background-color: #e6b800;
+      transform: scale(1.02);
+    }
+
+    p {
+      margin-top: 15px;
+      font-size: 0.95rem;
+    }
+
+    a {
+      color: #ffcc00;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    @keyframes fadeInPopup {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Welcome Back Explorer!</h2>
+    <form onsubmit="return handleLogin(event)">
+      <input type="text" id="username" placeholder="Username" required>
+
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required>
+        <span class="eye-icon" onclick="togglePassword()">👁️</span>
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+    <p>Don’t have an account? <a href="register.html">Register</a></p>
+  </div>
+
+  <script>
+    // Password visibility toggle
+    function togglePassword() {
+      const passwordField = document.getElementById("password");
+      const eyeIcon = document.querySelector(".eye-icon");
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        eyeIcon.textContent = "🙈"; // Hide icon
+      } else {
+        passwordField.type = "password";
+        eyeIcon.textContent = "👁️"; // Show icon
+      }
+    }
+
+    // Redirect directly to home page on login
+    function handleLogin(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+    if (username && password) {
+      // ✅ Store login state
+      localStorage.setItem("wanderlustUser", "true");
+      // ✅ Redirect to home
+      window.location.href = "home.html";
+    } else {
+      alert("Please enter both username and password!");
+    }
+    }
+  </script>
+</body>
+</html>

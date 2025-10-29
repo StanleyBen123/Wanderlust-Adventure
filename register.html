@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wanderlust Adventure</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('https://media.architecturaldigest.com/photos/67c721a9b35a51f890d2039d/3:2/w_3000,h_2000,c_limit/GettyImages-1301180174.jpg?auto=compress&cs=tinysrgb&dpr=2&h=1000') center/cover no-repeat fixed;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .register-container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 15px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    h2 {
+      color: #ffcc00;
+      margin-bottom: 15px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input, select {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #ffcc00;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e6b800;
+    }
+
+    p {
+      margin-top: 10px;
+    }
+
+    a {
+      color: #ffcc00;
+      text-decoration: none;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    label {
+      text-align: left;
+      font-size: 0.9em;
+      color: #ddd;
+    }
+
+    /* Password eye icon */
+    .input-group {
+      position: relative;
+      width: 100%;
+    }
+
+    .input-group input {
+      padding: 10px 40px 10px 10px; 
+    }
+
+    .eye-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: #555;
+      user-select: none;
+    }
+
+    .eye-icon:hover {
+      color: #ffcc00;
+      transform: translateY(-50%) scale(1.2);
+      transition: 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h2>Create Your Wanderlust Account</h2>
+    <form id="registerForm" onsubmit="return handleRegister(event)">
+      <input type="text" id="fullname" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="username" placeholder="Username" required>
+
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required>
+        <span class="eye-icon" onclick="togglePassword()" aria-label="Toggle password visibility">👁️</span>
+      </div>
+
+      <label>Date of Birth</label>
+      <input type="date" id="dob" required>
+
+      <label>Gender</label>
+      <select id="gender" required>
+        <option value="">Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+        <option>Prefer not to say</option>
+      </select>
+
+      <label>Country of Residence</label>
+      <select id="country" required>
+        <option value="">Select Country</option>
+        <option>India</option>
+        <option>United States</option>
+        <option>United Kingdom</option>
+        <option>Australia</option>
+        <option>Canada</option>
+        <option>France</option>
+        <option>Germany</option>
+        <option>Italy</option>
+        <option>Japan</option>
+        <option>Singapore</option>
+        <option>United Arab Emirates</option>
+        <option>Brazil</option>
+        <option>South Africa</option>
+      </select>
+
+      <label>Favorite Travel Type</label>
+      <select id="travelType" required>
+        <option value="">Select Type</option>
+        <option>Adventure</option>
+        <option>Beach</option>
+        <option>Cultural</option>
+        <option>Wildlife</option>
+        <option>Luxury</option>
+      </select>
+
+      <label>Preferred Budget Range</label>
+      <select id="budget" required>
+        <option value="">Choose Range</option>
+        <option>Economy</option>
+        <option>Mid-range</option>
+        <option>Luxury</option>
+      </select>
+
+      <label>Preferred Season to Travel</label>
+      <select id="season" required>
+        <option value="">Choose Season</option>
+        <option>Summer</option>
+        <option>Winter</option>
+        <option>Monsoon</option>
+        <option>Anytime</option>
+      </select>
+
+      <label>Emergency Contact Number</label>
+      <input type="tel" id="emergency" placeholder="+91 9876543210" required>
+
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+  </div>
+
+  <script>
+    // Toggle password visibility
+    function togglePassword() {
+      const passwordField = document.getElementById("password");
+      const eyeIcon = document.querySelector(".eye-icon");
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        eyeIcon.textContent = "🙈";
+      } else {
+        passwordField.type = "password";
+        eyeIcon.textContent = "👁️";
+      }
+    }
+
+    // Handle form submission
+    function handleRegister(event) {
+      event.preventDefault();
+
+      const fields = [
+        'fullname', 'email', 'username', 'password',
+        'dob', 'gender', 'country', 'travelType',
+        'budget', 'season', 'emergency'
+      ];
+
+      for (let id of fields) {
+        const field = document.getElementById(id);
+        if (!field.value.trim()) {
+          alert("Please fill the entire form before registering!");
+          field.focus();
+          return false;
+        }
+      }
+      // ✅ Save user session flag
+      localStorage.setItem("wanderlustUser", "true");
+
+      // All fields filled → redirect to home
+      window.location.href = "home.html";
+      return true;
+    }
+  </script>
+</body>
+</html>
