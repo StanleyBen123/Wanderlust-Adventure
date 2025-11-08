@@ -145,7 +145,7 @@
       .nav-buttons { flex-direction: column; margin-top: 10px; }
     }
 
-    /* HERO */
+    /* HERO SECTION */
     .hero {
       height: 100vh;
       display: flex;
@@ -311,8 +311,28 @@
     </div>
   </section>
 
-<footer>
-  <p>&copy; 2025 Wanderlust Adventure | All Rights Reserved</p>
-</footer>
+  <footer>
+    <p>&copy; 2025 Wanderlust Adventure | All Rights Reserved</p>
+  </footer>
+
+  <!-- ✅ JavaScript for navigation and button -->
+  <script>
+    function goToServices() {
+      window.location.href = "destinations.html";
+    }
+
+    function toggleMenu() {
+      document.getElementById("nav-links").classList.toggle("show");
+    }
+
+    window.addEventListener("scroll", () => {
+      const nav = document.querySelector("nav");
+      if (window.scrollY > 10) {
+        nav.classList.add("scrolled");
+      } else {
+        nav.classList.remove("scrolled");
+      }
+    });
+  </script>
 </body>
 </html>
