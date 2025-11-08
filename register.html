@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,14 +80,25 @@
       color: #ddd;
     }
 
-    /* Password eye icon */
+    /* Password input styling */
     .input-group {
       position: relative;
       width: 100%;
     }
 
     .input-group input {
-      padding: 10px 40px 10px 10px; 
+      padding: 10px 40px 10px 10px;
+    }
+
+    /* Hide browser default password reveal buttons */
+    input[type="password"]::-ms-reveal,
+    input[type="password"]::-ms-clear {
+      display: none;
+    }
+
+    input[type="password"]::-webkit-credentials-auto-fill-button,
+    input[type="password"]::-webkit-textfield-decoration-container {
+      display: none !important;
     }
 
     .eye-icon {
@@ -95,15 +107,15 @@
       top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
-      font-size: 1.1rem;
-      color: #555;
+      font-size: 1.3rem;
+      color: #ccc;
+      transition: 0.3s ease;
       user-select: none;
     }
 
     .eye-icon:hover {
       color: #ffcc00;
       transform: translateY(-50%) scale(1.2);
-      transition: 0.2s ease;
     }
   </style>
 </head>
@@ -115,9 +127,10 @@
       <input type="email" id="email" placeholder="Email" required>
       <input type="text" id="username" placeholder="Username" required>
 
+      <!-- Password field (updated version) -->
       <div class="input-group">
         <input type="password" id="password" placeholder="Password" required>
-        <span class="eye-icon" onclick="togglePassword()" aria-label="Toggle password visibility">👁️</span>
+        <span class="eye-icon" id="togglePassword" title="Show/Hide Password"></span>
       </div>
 
       <label>Date of Birth</label>
@@ -186,18 +199,16 @@
   </div>
 
   <script>
-    // Toggle password visibility
-    function togglePassword() {
-      const passwordField = document.getElementById("password");
-      const eyeIcon = document.querySelector(".eye-icon");
-      if (passwordField.type === "password") {
-        passwordField.type = "text";
-        eyeIcon.textContent = "🙈";
-      } else {
-        passwordField.type = "password";
-        eyeIcon.textContent = "👁️";
-      }
-    }
+    // Initialize eye icon
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+    togglePassword.innerHTML = "👁️"; // Default open-eye icon
+
+    togglePassword.addEventListener('click', () => {
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      togglePassword.innerHTML = type === 'password' ? "👁️" : "🙈"; // Toggle emoji
+    });
 
     // Handle form submission
     function handleRegister(event) {
@@ -217,10 +228,11 @@
           return false;
         }
       }
+
       // ✅ Save user session flag
       localStorage.setItem("wanderlustUser", "true");
 
-      // All fields filled → redirect to home
+      // Redirect to home page
       window.location.href = "home.html";
       return true;
     }
